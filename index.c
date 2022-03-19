@@ -8,6 +8,7 @@ int main() {
   // Pegar as informações necessárias
   printf("Por favor, digite as informações necessárias.\n");
 
+  // a = limite inferior; b = limite superior
   printf("Intervalo a b: ");
   scanf("%f %f", &a, &b);
 
@@ -15,25 +16,33 @@ int main() {
   printf("Número de subintervalos: ");
   scanf("%f", &n);
 
+  // func = f(x) e^(-2x) + 2
   float func(float x) {
     aux = -2 * x;
     return pow(M_E, aux) + 2;
   }
 
+  // Caso o limite inferior for maior que o
+  // superior, faz a inversão dos limites
   if (a > b) {
     tmp = a;
     a = b;
     b = tmp;
   }
   
+  // w = tamanho de cada passo/coluna
   w = (b - a) / n;
 
+  // ed = soma dos valores de área
+  // aplicados a extrema direita da coluna
   i = a;
-  while (i <= b) {
+  while (i <= b - w) {
     i += w;
     ed += w * func(i);
   }
 
+  // ee = soma dos valores de área 
+  // aplicados a extrema esquerda da coluna
   i = a;
   while (i < b) {
     ee += w * func(i);
